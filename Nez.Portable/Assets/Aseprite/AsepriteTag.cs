@@ -25,6 +25,11 @@ namespace Nez.Aseprite
 		public readonly AsepriteLoopDirection LoopDirection;
 
 		/// <summary>
+		/// The repeat count defined for the animation represented by this tag.
+		/// </summary>
+		public readonly int Repeat;
+
+		/// <summary>
 		/// The name given this tag in Aseprite.
 		/// </summary>
 		public readonly string Name;
@@ -54,11 +59,12 @@ namespace Nez.Aseprite
 		/// </summary>
 		public AsepriteUserData UserData { get; }
 
-		internal AsepriteTag(int from, int to, AsepriteLoopDirection loopDirection, Color color, string name)
+		internal AsepriteTag(int from, int to, AsepriteLoopDirection loopDirection, int repeat, Color color, string name)
 		{
 			From = from;
 			To = to;
 			LoopDirection = loopDirection;
+			Repeat = repeat;
 			_oldVersionColor = color;
 			Name = name;
 			UserData = new AsepriteUserData();

@@ -380,14 +380,16 @@ namespace Nez.Aseprite
 										throw new InvalidOperationException($"Unknown loop direction '{direction}'");
 									}
 
-									reader.IgnoreBytes(8);
+									int repeat = reader.ReadWord();
+									reader.IgnoreBytes(6);
+									
 									byte r = reader.ReadByte();
 									byte g = reader.ReadByte();
 									byte b = reader.ReadByte();
 									reader.IgnoreByte();
 									string tagName = reader.ReadAsepriteString();
 									Color tagColor = premultiplyAlpha ? Color.FromNonPremultiplied(r, g, b, byte.MaxValue) : new Color(r, g, b, byte.MaxValue);
-									AsepriteTag tag = new AsepriteTag(fromFrame, toFrame, loopDirection, tagColor, tagName);
+									AsepriteTag tag = new AsepriteTag(fromFrame, toFrame, loopDirection, repeat, tagColor, tagName);
 									tags.Add(tag);
 								}
 
